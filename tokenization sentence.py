@@ -9,6 +9,12 @@ english = 0
 mixed = 0
 other = 0
 
+# initialize the array for each category
+malaySen = []
+englishSen = []
+mixedSen = []
+otherSen = []
+
 with open("new file2", "r") as f:  # declare new file2 as f
     for index, sentence in enumerate(f, start=1):
         en_count = 0  # initialize the malay and english counter
@@ -30,21 +36,26 @@ with open("new file2", "r") as f:  # declare new file2 as f
 
         """start analysis the sentences is in which language"""
         if en_count > bm_count:  # if the english counter more than the malay so it'll consider english sentence
-            print(index, " :", sentence, " : english")
+            # print(index, " :", sentence, " : english")
+            englishSen.append(sentence)
             english += 1
         elif bm_count > en_count:  # if the malay counter more than the english so it'll consider malay sentence
-            print(index, " :", sentence, " : malay")
+            # print(index, " :", sentence, " : malay")
+            malaySen.append(sentence)
             malay += 1
         elif bm_count & en_count == 0:  # if the sentences doesnt contain any english or malay word so its consider other
-            print(index, " :", sentence, " : other")  # because its might only contain punctuation only
+            # print(index, " :", sentence, " : other")  # because its might only contain punctuation only
+            otherSen.append(sentence)
             other += 1
         else:
             if (
                     bm_count == en_count) & bm_count > 0:  # if both counter is equal and the counter more than 1 its consider
-                print(index, " :", sentence, " : mixed")  # as mixed language. Otherwise, it'll consider other
+                # print(index, " :", sentence, " : mixed")  # as mixed language. Otherwise, it'll consider other
+                mixedSen.append(sentence)
                 mixed += 1
             else:
-                print(index, " :", sentence, " : other")
+                # print(index, " :", sentence, " : other")
+                otherSen.append(sentence)
                 other += 1
 
 print()
@@ -53,6 +64,13 @@ print("english : ", english)
 print("malay : ", malay)
 print("other : ", other)
 print("mixed : ", mixed)
+
+with open("Output Malay", "w+") as f:
+    f.writelines("\n".join((malaySen[a]) for a in malaySen))
+print()
+
+with open("Output english", "w+") as f:
+    f.writelines("\n".join((englishSen[a]) for a in englishSen))
 
 """Problem 2 : some of the element in others array contain malay and english word however the language_detection.py 
 detect these word in other language for example "bijak" was detect as arabic"""
