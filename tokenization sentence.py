@@ -66,11 +66,11 @@ print("other : ", other)
 print("mixed : ", mixed)
 
 with open("Output Malay", "w+") as f:
-    f.writelines("\n".join((malaySen[a]) for a in malaySen))
+    f.writelines("\n".join((a) for a in malaySen))
 print()
 
 with open("Output english", "w+") as f:
-    f.writelines("\n".join((englishSen[a]) for a in englishSen))
+    f.writelines("\n".join((a) for a in englishSen))
 
 """Problem 2 : some of the element in others array contain malay and english word however the language_detection.py 
 detect these word in other language for example "bijak" was detect as arabic"""
